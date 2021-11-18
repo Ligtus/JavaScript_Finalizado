@@ -1,39 +1,21 @@
 const app = require("./app");
-const csv = require("csv-parser")
-const fs = require("fs")
-let nombres = []
-let resp = []
+const csv = require("./csv_func")
+const listas = ['./hombres.csv', './mujeres.csv', './apellidos.csv', './apellidos-20.csv']
+const nombres = []
 
-app.get('/existe/:nombre', (req,res)=>{
+listas.forEach(element => {
+    nombres.push(csv.getNames(element))
+});
+
+app.get('/existe/:nombre',(req,res)=>{
     const {nombre} = req.params
-    let existe = false
-    fs.createReadStream('hombres.csv')
-    .pipe(csv())
-    .on('data', (data) => {
-        nombres.push(`${data["nombre"]}`)
-    })
-    .on('end', () => {
-        nombres.forEach(element => {
-            if (nombre.toLowerCase() == element.toLowerCase()) {
-                existe = true
-                return
-            }
-        });
-        res.send(existe)
-        console.log("done")
-    });
+    let existe = nombres.some(element => csv.checkName(nombre, element))
+    console.log("Alguien ha buscado " + nombre + ", " + existe)
+    res.send(existe)
 })
 
-app.get('/nombres', (req,res)=>{
-    fs.createReadStream('hombres.csv')
-    .pipe(csv())
-    .on('data', (data) => {
-        nombres.push(`${data["nombre"]}`)
-    })
-    .on('end', () => {
-        res.send(nombres)
-        console.log("done")
-    });
+app.get('/nombres',(req,res)=>{
+    res.send(nombres)
 })
 
 app.get('/', (req,res)=>{
