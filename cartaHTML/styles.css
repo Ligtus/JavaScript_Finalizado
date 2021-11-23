@@ -1,0 +1,70 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cuerpo {
+    display: flex;
+    background-color: #f2f2f0;
+    width: 615px;
+    height: 950px;
+    border-radius: 3%;
+    box-shadow: 0.5em 0.5em 1em #BBBBBB;
+    flex-direction: column;
+}
+
+.num {
+    font-size: 7em;
+}
+
+#pica1, #pica2, #num2 {
+    transform: rotate(180deg);
+}
+
+.arriba {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 20%;
+    padding: 5%;
+}
+
+.centro {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 60%;
+}
+
+.abajo{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    height: 20%;
+    padding: 5%;
+}
+
+#num1, #num2 {
+    font-size: 3.5em;
+}
+
+#numero1, #numero2 {
+    font-size: 6em;
+    margin: 1%;
+}
+
+#numero2 {
+    display: flex;
+    transform: rotate(180deg);
+}
