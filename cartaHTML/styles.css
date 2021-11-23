@@ -4,6 +4,7 @@ html, body {
 
 body {
     margin: 0;
+    color: red;
 }
 
 .container {
@@ -19,7 +20,7 @@ body {
     height: 950px;
     border-radius: 3%;
     box-shadow: 0.5em 0.5em 1em #BBBBBB;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .num {
@@ -30,12 +31,13 @@ body {
     transform: rotate(180deg);
 }
 
-.arriba {
+.izq {
     display: flex;
     justify-content: left;
     flex-direction: column;
     align-items: flex-start;
-    height: 20%;
+    width: 20%;
+    height: 100%;
     padding: 5%;
 }
 
@@ -44,14 +46,14 @@ body {
     text-align: center;
     justify-content: space-around;
     flex-direction: column;
-    height: 60%;
+    width: 60%;
 }
 
-.abajo{
+.der{
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
-    height: 20%;
+    width: 20%;
     padding: 5%;
 }
 
