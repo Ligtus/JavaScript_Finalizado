@@ -10,37 +10,25 @@
     </style>
 </head>
 <body>
-    <h1>Comprobador de nombres</h1>
-    <h2>Esta utilidad nos permite comprobar si un nombre/apellido de persona existe en España</h2>
-    <label for="nombre">nombre</label><input id="nombre">
-    <label for="apellidos">apellidos</label><input id="apellidos">
-    <br>
-    <button id="comprobar">comprobar</button>
-    <br>
-    <div id="resultado">...</div>
-
+    <h1>Historico de resultados de la lotería</h1>
+    <h2>Este programa nos permite comprobar los resultados de la lotería desde el año 1985</h2>
+    <div id="resultado"></div>
     <script>
-    document.getElementById('comprobar').addEventListener('click',comprobar)
     async function comprobar(){
-        const nombre = document.getElementById('nombre').value 
-        const apellidos = document.getElementById('apellidos').value
         
         //CON FETCH SE CONECTA AL BACKEND
-        if(apellidos){
             try {
-                const res = await fetch("http://localhost:4000/existe/?nombre=$(nombre)&$apellidos=$(apellidos)")
+                const res = await fetch("http://localhost:4000/resultados")
                 const json = await res.json()
                 console.log(json)
-                const msgNombre = json.nombre_de_hombre || json.nombre_de_mujer
-                const msgApell = json.apellidos ? 'El apellido existe' : 'El apellido no existe'
+                
             
-                document.querySelector('#resultado').innerHTML = msgNombre + ' ' + msgApell
+                document.getElementById('resultado').innerHTML = json
             } 
             catch {
                 error => console.error("Error al conectar con el backend")
             }
 
-        }else {
             // existe/xxxx (nombres)
 
             // VERSION PROMESAS
@@ -55,15 +43,15 @@
             
 
             // VERSION AWAIT (Hay que añadir async a la función inicial)
-            try {
+         /*   try {
             const res = await fetch('http://10.101.11.12:4000/existe/'+nombre)
             const json = await res.json()
             document.getElementById('resultado').innerHTML=json.nombre_de_hombre || json.nombre_de_mujer ?
             'El nombre existe': 'El nombre no existe' 
             }catch{(error => console.error('Error al conectar con el backend'))
-             }
-        }
+             } */
     }
+    window.onload = comprobar()
     </script>
 </body>
 </html>

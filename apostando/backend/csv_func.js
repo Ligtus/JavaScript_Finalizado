@@ -1,26 +1,43 @@
 const csv = require("csv-parser");
 const fs = require("fs");
-const resultados = [];
+const numeros = [];
+const resultadoFinal = [];
 
-exports.getNames = function (fichero) {
+exports.getResults = function (fichero, addData, callback) {
   fs.createReadStream(fichero)
-    .pipe(
-      csv({headers: false, skipLines : 1})
-    )
+    .pipe(csv({ headers: false, skipLines: 1 }))
     .on("data", (data) => {
-        numeros = []
-        numeros.push(`${data[1]}`)
-        numeros.push(`${data[2]}`)
-        numeros.push(`${data[3]}`)
-        numeros.push(`${data[4]}`)
-        numeros.push(`${data[5]}`)
-        numeros.push(`${data[6]}`)
-        resultados.push(`${data[0]}`);
-        resultados.push(numeros);
+      addData([
+        `${data[1]}`,
+        `${data[2]}`,
+        `${data[3]}`,
+        `${data[4]}`,
+        `${data[5]}`,
+        `${data[6]}`,
+        `${data[7]}`,
+      ]);
     })
     .on("end", () => {
-      console.log("Resultados totales: " + resultados.length);
+      /*for (let index = 0; index < 7; index++) {
+        resultadoFinal.push(masRepetido(numeros, index));
+      }*/
+      callback()
     });
+};
 
-  return resultados;
+exports.masRepetido = function(listaNum, index) {
+  let masRepeticiones = 1;
+  let repeticiones = 0;
+  let numero;
+  for (var i = 0; i < listaNum.length; i++) {
+    for (var j = i; j < listaNum.length; j++) {
+      if (listaNum[i][index] == listaNum[j][index]) repeticiones++;
+      if (masRepeticiones < repeticiones) {
+        masRepeticiones = repeticiones;
+        numero = listaNum[i][index];
+      }
+    }
+    repeticiones = 0;
+  }
+  return numero;
 };
