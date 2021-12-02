@@ -18,14 +18,15 @@
 
     <script>
       let pagina = 1;
-      let url;
+      let datos;
+      let url = window.location.href;
+      url = url.substring(0, url.indexOf(":", 5));
       async function descargar() {
         mostrarCarga(false);
         try {
-          const res = await fetch("http://localhost:4000/url/" + pagina);
+          const res = await fetch(url + ":10000/url/" + pagina);
           pagina++;
-          console.log(res);
-          url = await res.json();
+          datos = await res.json();
 
           cargar();
           mostrarCarga(true);
@@ -35,13 +36,13 @@
       }
       async function cargar() {
         let cargadas = 0;
-        url.forEach((element) => {
+        datos.forEach((element) => {
           let imagen = document.createElement("img");
           let link = document.createElement("a");
           document.getElementById("imagenes").appendChild(link);
           link.appendChild(imagen);
-          link.setAttribute("href", url[cargadas]["url"]);
-          imagen.setAttribute("src", url[cargadas]["thumbs"]["large"]);
+          link.setAttribute("href", datos[cargadas]["url"]);
+          imagen.setAttribute("src", datos[cargadas]["thumbs"]["large"]);
           cargadas++;
         });
       }
@@ -66,8 +67,8 @@
 
       window.onscroll = function (ev) {
         if (
-          window.innerHeight + window.pageYOffset >=
-          document.body.offsetHeight - 2
+          (window.innerHeight + window.pageYOffset) >=
+          (document.body.offsetHeight - document.getElementById("cargas").offsetHeight)
         ) {
           descargar();
         }

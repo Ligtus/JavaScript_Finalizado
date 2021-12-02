@@ -1,6 +1,7 @@
 const app = require("./app");
 const cors = require("cors");
 const fetch = require("node-fetch");
+const { listenerCount } = require("./app");
 const datos = []
 
 app.use(cors());
@@ -18,7 +19,7 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname+"\\frontend\\index.html")
 });
 
-app.listen(4000, () => {
-  console.log("Iniciado en puerto 4000");
+let listener = app.listen(10000, () => {
+  console.log("Iniciado en puerto " + listener.address().port);
 });
 
