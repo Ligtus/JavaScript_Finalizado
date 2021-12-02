@@ -1,0 +1,69 @@
+body, html {
+    margin: 0;
+    display: flex;
+    text-align: center;
+    align-content: flex-start;
+    vertical-align: middle;
+    flex-wrap: wrap;
+    background-color: darkgray;
+    color: whitesmoke;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    vertical-align: middle;
+    flex-wrap: wrap;
+}
+
+a {
+    height: auto;
+    max-width: 23%;
+    margin: 1%;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-style: underline;
+}
+
+#cargar {
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #5255e6;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+#cargar:hover {
+    background-color: #816eec
+}
+
+#cargar:active {
+    background-color: #816eec;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#cargando {
+    max-height: 35px;
+    max-width: 35px;
+}
+
+#cargas {
+    margin-bottom: 20px;
+}
