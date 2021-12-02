@@ -1,0 +1,115 @@
+body, html {
+    margin: 0;
+    display: flex;
+    text-align: center;
+    align-content: center;
+    vertical-align: middle;
+    flex-wrap: wrap;
+    background-color: rgb(75, 75, 75);
+    color: whitesmoke;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.imagen {
+    display: flex;
+    width: 90%;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    vertical-align: middle;
+    flex-wrap: wrap;
+}
+
+.control {
+    display: flex;
+    width: 5%;
+    align-content: center;
+    justify-content: center;
+    vertical-align: middle;
+    flex-wrap: wrap;
+}
+
+#imagenes img, #imagenes a {
+    width: 100%;
+    transition: 0.8;
+    transition: visibility 0s 0.3s, opacity 0.3s linear;
+    user-select: none;
+}
+
+.control i {
+    font-size: larger;
+}
+
+.control{
+    transition: 0.3s;
+    height: 100%;
+}
+
+.control:hover{
+    background-color: #b4b4b488;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#container {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#carga {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    text-align: center;
+    padding: 4%;
+    border-radius: 20%;
+    background-color: #11111155;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+}
+
+#cargar {
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #5255e6;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+#cargar:hover {
+    background-color: #816eec
+}
+
+#cargar:active {
+    background-color: #816eec;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#cargando {
+    max-height: 35px;
+    max-width: 35px;
+}
+
+#cargas {
+    margin-bottom: 20px;
+}

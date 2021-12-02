@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>WallPaper Slideshow</title>
+    <link rel="icon" href="https://wallhaven.cc/favicon.ico">
+  </head>
+  <body>
+    <div id="container">
+      <div id="carga">Cargando</div>
+    </div>
+    <div id="previous" class="control">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+    <div id="imagenes" class="imagen">
+      <a id="link" href="">
+        <img id="imagenActual" src="" onload="mostrarCarga(false)"/>
+      </a>
+    </div>
+    <div id="next" class="control">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+
+    <script>
+      let actual = 0;
+      let pagina = 1;
+      let datos;
+      let url = window.location.href;
+      let cargando = true;
+      url = url.substring(0, url.indexOf(":", 5));
+
+      async function descargar(indice) {
+        if (arguments.length > 0) {
+          if (pagina > 1 && arguments[0] == -1) {
+            pagina--;
+          } else if (arguments[0] == 1) {
+            pagina++;
+          } else {
+            return;
+          }
+        }
+        try {
+          const res = await fetch(url + ":10000/url/" + pagina);
+          datos = await res.json();
+
+          cargar();
+        } catch {
+          (error) => console.error("Error al conectar con el backend");
+        }
+      }
+      async function cargar(indice) {
+        mostrarCarga(true)
+        if (arguments.length > 0) {
+          if (actual == 23 && arguments[0] == 1) {
+            await descargar(1);
+            actual = 0;
+          } else if (actual == 0 && arguments[0] == -1 && pagina > 1) {
+            await descargar(-1);
+            actual = 23;
+          } else if (actual == 0 && arguments[0] == -1 && pagina == 1) {
+            cargando = false;
+            mostrarCarga(false)
+            return;
+          }
+          actual += arguments[0];
+        }
+        document
+          .getElementById("link")
+          .setAttribute("href", datos[actual]["url"]);
+        document
+          .getElementById("imagenActual")
+          .setAttribute("src", datos[actual]["thumbs"]["large"]);
+        cargando = false;
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.code == "ArrowLeft" && !cargando) {
+          cargando = true;
+          cargar(-1);
+        } else if (e.code == "ArrowRight" && !cargando) {
+          cargando = true;
+          cargar(1);
+        }
+      });
+
+      document.getElementById("next").addEventListener("click", function () {
+        cargar(1);
+      });
+      document
+        .getElementById("previous")
+        .addEventListener("click", function () {
+          cargar(-1);
+      });
+
+      function mostrarCarga(mostrar) {
+        if (mostrar) {
+          document.getElementById("container").style.visibility = "visible"
+        } else {
+          document.getElementById("container").style.visibility = "hidden"
+        }
+      }
+
+      window.onload = descargar();
+    </script>
+  </body>
+</html>
